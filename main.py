@@ -1,6 +1,6 @@
 import base64
 from io import BytesIO
-
+import os
 from flask import Flask
 from matplotlib.figure import Figure
 
@@ -19,4 +19,5 @@ def hello():
    data = base64.b64encode(buf.getbuffer()).decode("ascii")
    return f"<img src='data:image/png;base64,{data}'/>"
 
-app.run(port=8080)
+port = int(os.environ.get("PORT", 5000))
+app.run(host='0.0.0.0', port=port)
